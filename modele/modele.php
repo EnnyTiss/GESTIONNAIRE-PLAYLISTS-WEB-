@@ -56,18 +56,18 @@ function getEpisodesPrepared($connexion) {
 }
 
 // retourne les informations sur la série nommée $nomSerie
-function getSeriesByName($connexion, $nomSerie) {
-	$nomSerie = mysqli_real_escape_string($connexion, $nomSerie); // sécurisation de $nomSerie
-	$requete = "SELECT * FROM Series WHERE nomSerie = '". $nomSerie . "'";
+function getChansonByName($connexion, $titreChanson) {
+	$titre = mysqli_real_escape_string($connexion, $titreChanson); // sécurisation de $nomSerie
+	$requete = "SELECT * FROM Series WHERE nomSerie = '". $titre . "'";
 	$res = mysqli_query($connexion, $requete);
-	$series = mysqli_fetch_all($res, MYSQLI_ASSOC);
-	return $series;
+	$Chanson = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $Chanson;
 }
 
 // insère une nouvelle série nommée $nomSerie
-function insertSerie($connexion, $nomSerie) {
-	$nomSerie = mysqli_real_escape_string($connexion, $nomSerie); // au cas où $nomSerie provient d'un formulaire
-	$requete = "INSERT INTO Series VALUES ('". $nomSerie . "')";
+function insertSerie($connexion, $titreChanson) {
+	$titre = mysqli_real_escape_string($connexion, $titreChanson); // au cas où $nomSerie provient d'un formulaire
+	$requete = "INSERT INTO Chanson VALUES ('". $titreChanson . "')";
 	$res = mysqli_query($connexion, $requete);
 	return $res;
 }
