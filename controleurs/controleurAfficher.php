@@ -2,9 +2,9 @@
 $message = "";
 
 // recupération des séries
-$series = getInstances($connexion, "Series");
-if($series == null || count($series) == 0) {
-	$message .= "Aucune série n'a été trouvée dans la base de données !";
+$Chanson = getInstances($connexion, "Chanson");
+if($series == null || count($Chanson) == 0) {
+	$message .= "Aucune chanson n'a été trouvée dans la base de données !";
 }
 
 
@@ -15,13 +15,13 @@ if($series == null || count($series) == 0) {
 */
 
 // recupération des actrices
-$actrices = getInstances($connexion, "Actrices");
-if($actrices == null || count($actrices) == 0) {
-	$message .= "Aucune actrice n'a été trouvée dans la base de données !";
+$Version = getInstances($connexion, "Version");
+if($Version == null || count($Version) == 0) {
+	$message .= "Aucune version n'a été trouvée dans la base de données !";
 }
 
 // recupération des épisodes numérotés 1 et 2 avec une requête préparée
-$tabEpisodes = getEpisodesPrepared($connexion);
+/*$tabEpisodes = getEpisodesPrepared($connexion);
 if($tabEpisodes == null) {
 	$message .= "Aucun épisode n'a été trouvé dans la base de données !";
 }
@@ -30,4 +30,4 @@ else {
 	$episodes2 = $tabEpisodes["episodes2"];
 }
 
-?>
+?>*/

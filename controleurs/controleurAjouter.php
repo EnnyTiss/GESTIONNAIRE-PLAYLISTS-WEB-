@@ -1,20 +1,20 @@
 <?php 
 if(isset($_POST['boutonValider'])) { // formulaire soumis
 
-	$nomSerie = $_POST['nomSerie']; // recuperation de la valeur saisie
-	$verification = getSeriesByName($connexion, $nomSerie);
+	$titreChanson = $_POST['titreChanson']; // recuperation de la valeur saisie
+	$verification = getChansonByName($connexion, $titreChanson);
 
 	if($verification == FALSE || count($verification) == 0) { // pas de série avec ce nom, insertion
-		$insertion = insertSerie($connexion, $nomSerie);
+		$insertion = insertChanson($connexion, $titreChanson);
 		if($insertion == TRUE) {
-			$message = "La Chanson $nomSerie a bien été ajoutée !";
+			$message = "La Chanson $titreChanson a bien été ajoutée !";
 		}
 		else {
-			$message = "Erreur lors de l'insertion de la Chanson $nomSerie.";
+			$message = "Erreur lors de l'insertion de la Chanson $titreChanson.";
 		}
 	}
 	else {
-		$message = "Une Chanson existe déjà avec ce nom ($nomSerie).";
+		$message = "Une Chanson existe déjà avec ce nom ($titreChanson).";
 	}
 }
 
