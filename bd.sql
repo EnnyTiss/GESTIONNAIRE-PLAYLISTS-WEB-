@@ -4,12 +4,12 @@
 */
 
 /* Dropping existing tables */
-DROP TABLE IF EXISTS Critiques;
-DROP TABLE IF EXISTS Jouer;
-DROP TABLE IF EXISTS Actrices; 
-DROP TABLE IF EXISTS Episodes; 
-DROP TABLE IF EXISTS Saisons; 
-DROP TABLE IF EXISTS Series;
+DROP TABLE IF EXISTS Groupe; 
+DROP TABLE IF EXISTS Musicien;
+DROP TABLE IF EXISTS Chanson; 
+DROP TABLE IF EXISTS Version; 
+DROP TABLE IF EXISTS Album; 
+DROP TABLE IF EXISTS Playlist;
 
 /* Creating tables */ 
 
