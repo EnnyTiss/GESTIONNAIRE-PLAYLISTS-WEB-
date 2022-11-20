@@ -57,14 +57,14 @@ function getEpisodesPrepared($connexion) {
 
 // retourne les informations sur la série nommée $nomSerie
 function getChansonByName($connexion, $titreChanson) {
-	$titre = mysqli_real_escape_string($connexion, $titreChanson); // sécurisation de $nomSerie
-	$requete = "SELECT * FROM Series WHERE nomSerie = '". $titre . "'";
+	$titre = mysqli_real_escape_string($connexion, $titreChanson); // sécurisation de $titreChanson
+	$requete = "SELECT * FROM Chanson WHERE titreChanson = '". $titre . "'";
 	$res = mysqli_query($connexion, $requete);
 	$Chanson = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $Chanson;
 }
 
-// insère une nouvelle série nommée $nomSerie
+// insère une nouvelle série nommée $titreChanson
 function insertSerie($connexion, $titreChanson) {
 	$titre = mysqli_real_escape_string($connexion, $titreChanson); // au cas où $nomSerie provient d'un formulaire
 	$requete = "INSERT INTO Chanson VALUES ('". $titreChanson . "')";
@@ -72,7 +72,7 @@ function insertSerie($connexion, $titreChanson) {
 	return $res;
 }
 
-function search($connexion, $table, $valeur) {
+/*function search($connexion, $table, $valeur) {
 	$valeur = mysqli_real_escape_string($connexion, $valeur); // au cas où $valeur provient d'un formulaire
 	if($table == 'Series')
 		$requete = 'SELECT * FROM Series WHERE nomSerie LIKE \'%'.$valeur.'%\';';
@@ -82,5 +82,5 @@ function search($connexion, $table, $valeur) {
 	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $instances;
 }
-
+*/
 ?>
