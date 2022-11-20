@@ -8,7 +8,7 @@
 	<input type="date" name="dateChanson" id="dateChanson" required/>
 	<br/>
 	<label for="minutes"> durée de Chanson : </label>
-	<imput type="number" name="minutes" id="minutes" required/> : <imput type="number" name="secondes" id="secondes" required/>
+	<input type="number" name="minutes" id="minutes" required/> : <input type="number" name="secondes" id="secondes" required/>
 	<br/><br/>
 	<input type="submit" name="boutonValider" value="Ajouter"/>
 </form>
