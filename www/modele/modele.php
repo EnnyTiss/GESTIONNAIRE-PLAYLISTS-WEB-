@@ -64,40 +64,55 @@ function getChansonByName($connexion, $titreChanson) {
 	return $Chanson;
 }
 
-// insère une nouvelle série nommée $titreChanson
-function insertChanson($connexion, $titreChanson, $genreChanson){
-	$titre = mysqli_real_escape_string($connexion, $titreChanson); // au cas où $titreChanson provient d'un formulaire
-	$genre = mysqli_real_escape_string($connexion, $genreChanson); // au cas où $genreChanson vient d'un formulaire
-	$requete = "INSERT INTO Chanson (titreChanson, genreChanson) VALUES (' ". $titre ." ', ' ". $genre ." ')";
-	$res = musli_query($connexion, $requete);
-	return $res;
-}
-
-function insertVersion($connexion, $dureeV, $dateV, $nomFichierV){
-	$dureeVersion = mysqli_real_escape_string($connexion, $dureeV);
-	$dateVersion = mysqli_real_escape_string($connexion, $dateV);
-	$nomFichierVersion = mysqli_real_escape_string($connexion, $nomFichierV);
-	$requete= "INSERT INTO Version(dureeV, dateV, nomFichierV) VALUES ('". $dureeVersion . "', '". $dateVersion ."', '". $nomFichierVersion ."')";
+function getGroupeByName($connexion, $nomGrp) {
+	$nomGroupe = mysqli_real_escape_string($connexion, $nomGrp); // sécurisation de $nomGrp
+	$requete = "SELECT * FROM Groupe WHERE nomGrp = '". $nomGroupe . "'";
 	$res = mysqli_query($connexion, $requete);
-	return $res;
+	$Groupe = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $Groupe;
 }
+// insère une nouvelle série nommée $titreChanson
 
 function insertGroupe($connexion, $nomGrp){
-	$nomGroupe = mysqli_real_escape_string($conneixon, $nomGrp);
+	$nomGroupe = mysqli_real_escape_string($connexion, $nomGrp);
 	$requete = "INSERT INTO Groupe (nomGrp) VALUES (' ". $nomGroupe ." ')";
 	$res = mysqli_query($connexion, $requete);
 	return $res;
 }
+function insertChanson($connexion, $titreChanson, $genreChanson, $nomGrp){
+	$titre = mysqli_real_escape_string($connexion, $titreChanson); // au cas où $titreChanson provient d'un formulaire
+	$genre = mysqli_real_escape_string($connexion, $genreChanson); // au cas où $genreChanson vient d'un formulaire
+	$nomG = mysqli_real_escape_string($connexion, $nomGrp);
+	$requete = "INSERT INTO Chanson (titreChanson, genreChanson, nomGrp) VALUES (' ". $titre ." ', ' ". $genre ." ', ' ". $nomG ." ')";
+	$res = mysqli_query($connexion, $requete);
+	return $res;
+}
+
+function insertVersion($connexion, $titreChanson, $dureeV, $dateV, $nomFichierV){
+	$titre = mysqli_real_escape_string($connexion, $titreChanson);
+	$idTitre = "SELECT idC FROM Chanson WHERE titreChanson = '". $titre ."'";
+	echo($idTitre);
+	$dureeVersion = mysqli_real_escape_string($connexion, $dureeV);
+	echo('duree ça passe');
+	$dateVersion = mysqli_real_escape_string($connexion, $dateV);
+	echo('date ça passe');
+	$nomFichierVersion = mysqli_real_escape_string($connexion, $nomFichierV);
+	echo('nom fichier ça passe');
+	$requete= "INSERT INTO Version (idC, dureeV, dateV, nomFichierV) VALUES ('". $idTitre ."','". $dureeVersion ."', '". $dateVersion ."', '". $nomFichierVersion ."')";
+	$res = mysqli_query($connexion, $requete);
+	return $res;
+}
+
+
 	
-/*function search($connexion, $table, $valeur) {
+function search($connexion, $table, $valeur) {
 	$valeur = mysqli_real_escape_string($connexion, $valeur); // au cas où $valeur provient d'un formulaire
-	if($table == 'Series')
-		$requete = 'SELECT * FROM Series WHERE nomSerie LIKE \'%'.$valeur.'%\';';
-	else  // $table == 'Actrices'
-		$requete = 'SELECT * FROM Actrices WHERE nom LIKE \'%'.$valeur.'%\' OR prenom LIKE \'%'.$valeur.'%\';';
+	if($table == 'Version'){
+		$requete = 'SELECT * FROM Version WHERE titreChanson LIKE \'%'.$valeur.'%\';';
+	}
 	$res = mysqli_query($connexion, $requete);
 	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $instances;
 }
-*/
+
 ?>

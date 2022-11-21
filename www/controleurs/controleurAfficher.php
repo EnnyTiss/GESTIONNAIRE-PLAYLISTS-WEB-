@@ -2,10 +2,10 @@
 $message = "";
 
 // recupération des données chanson, groupe, genre
-$Chanson = getInstances($connexion, "Chanson");
+/*$Chanson = getInstances($connexion, "Chanson");
 if($series == null || count($Chanson) == 0) {
 	$message .= "Aucune chanson n'a été trouvée dans la base de données !";
-}
+}*/
 
 // recupération des versions
 $Version = getInstances($connexion, "Version"); // il va manque les genres

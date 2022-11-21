@@ -1,17 +1,35 @@
-<h2>Ajout d'une chanson </h2>
+<h2>Ajout d'une version de chanson </h2>
 <!-- test-->
 <form method="post" action="#">
 	<label for="titreChanson">Nom de la Chanson : </label>
-	<input type="text" name="titreChanson" id="titreChanson" placeholder="Black Summer" required />
+	<input type="text" name="titreChanson" id="titreChanson" placeholder="Black Summer" />
 	<br/>
-	<label for="dateChanson"> Date de sortie </label>
-	<input type="date" name="dateChanson" id="dateChanson" required/>
+	<label for="dateVersion"> Date de sortie </label>
+	<input type="date" name="dateVersion" id="dateVersion" />
 	<br/>
-	<label for="minutes"> durée de Chanson : </label>
-	<input type="number" min="0" name="minutes" id="minutes" required/> min <input type="number" min="0" max="60" name="secondes" id="secondes" required/> sec
+	<label for="dureeVersion"> durée de Chanson : </label>
+	<!--<input type="number" min="0" name="minutes" id="minutes" /> min <input type="number" min="0" max="59" name="secondes" id="secondes" /> sec
+	<br/>-->
+	<input type = "time" name = "dureeVersion" id = "dureeVersion" min = 0 max = 1 >
 	<br/>
 	<label for="nomGroupe"> nom du groupe : </label>
-	<input type="text" name="nomGroupe" id="nomGroupe" required/> 
+	<!--<input type="text" name="nomGroupe" id="nomGroupe" /> -->	
+	<select name = "nomGroupe" id = "nomGroupe" > 
+		<option value="Muse">Muse</option>
+		<option value="RHCP">RHCP</option>
+		<option value="Genesis">Genesis</option>
+		<option value="existe pas">Existe pas</option>
+	</select>
+	<br/>
+	<label for="genreChanson"> genre chanson : </label>
+	<!--<input type="text" name="genreChanson" id="genreChanson" />	-->
+	<select name = "genreChanson" id = "genreChanson" > 
+		<option value="pop">pop</option>
+		<option value="rock">rock</option>
+	</select>
+	<br/>
+	<label for="nomFichierV"> nom fichier : </label>
+	<input type="text" name="nomFichierV" id="nomFichierV" /> <!--pas de required ça me soaule on verra après -->
 	<br/><br/>
 	<input type="submit" name="boutonValider" value="Ajouter"/>
 </form>
