@@ -9,8 +9,11 @@
 	<br/>
 	<label for="minutes"> durée de Chanson : </label>
 	<input type="number" name="minutes" id="minutes" required/> : <input type="number" name="secondes" id="secondes" required/>
-	<br/><br/>
-	<input type="submit" name="boutonValider" value="Ajouter"/>
+	<br/>
+	<label for="nomGroupe"> nom du groupe : </label>
+	<input type="text" name="nomGroupe" id="nomGroupe" required/> 
+	<br/><br/> 
+	<input type="submit" name="boutonValider" value="Ajouter"/> 
 </form>
 
 <?php if(isset($message)) { ?>

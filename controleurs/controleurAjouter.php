@@ -6,9 +6,8 @@ if(isset($_POST['boutonValider'])) { // formulaire soumis
 
 	if($verification == FALSE || count($verification) == 0) { // pas de série avec ce nom, insertion
 		$insertionC = insertChanson($connexion, $titreChanson, $genreChanson);
-		$insertionV = insertVersion($connexion, $dureeV, $dateV, $nomFichierV);
-		$insertionG = insertGroupe($connexion, $nomGrp);
-		if($insertionC == TRUE && $insertionV == TRUE && $insertionG == TRUE) {
+		$insertionV = insertVerison($connexion, $)
+		if($insertion == TRUE) {
 			$message = "La Chanson $titreChanson a bien été ajoutée !";
 		}
 		else {

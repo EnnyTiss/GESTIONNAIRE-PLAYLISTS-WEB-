@@ -55,7 +55,7 @@ function getEpisodesPrepared($connexion) {
 	return array("episodes1" => $episodes1, "episodes2" => $episodes2);
 }
 
-// retourne les informations sur la série nommée $nomSerie
+// retourne les informations sur la série nommée $titreChanson
 function getChansonByName($connexion, $titreChanson) {
 	$titre = mysqli_real_escape_string($connexion, $titreChanson); // sécurisation de $titreChanson
 	$requete = "SELECT * FROM Chanson WHERE titreChanson = '". $titre . "'";
@@ -65,13 +65,30 @@ function getChansonByName($connexion, $titreChanson) {
 }
 
 // insère une nouvelle série nommée $titreChanson
-function insertSerie($connexion, $titreChanson) {
-	$titre = mysqli_real_escape_string($connexion, $titreChanson); // au cas où $nomSerie provient d'un formulaire
-	$requete = "INSERT INTO Chanson VALUES ('". $titreChanson . "')";
+function insertChanson($connexion, $titreChanson, $genreChanson){
+	$titre = mysqli_real_escape_string($connexion, $titreChanson); // au cas où $titreChanson provient d'un formulaire
+	$genre = mysqli_real_escape_string($connexion, $genreChanson); // au cas où $genreChanson vient d'un formulaire
+	$requete = "INSERT INTO Chanson (titreChanson, genreChanson) VALUES (' ". $titre ." ', ' ". $genre ." ')";
+	$res = musli_query($connexion, $requete);
+	return $res;
+}
+
+function insertVersion($connexion, $dureeV, $dateV, $nomFichierV){
+	$dureeVersion = mysqli_real_escape_string($connexion, $dureeV);
+	$dateVersion = mysqli_real_escape_string($connexion, $dateV);
+	$nomFichierVersion = mysqli_real_escape_string($connexion, $nomFichierV);
+	$requete= "INSERT INTO Version(dureeV, dateV, nomFichierV) VALUES ('". $dureeVersion . "', '". $dateVersion ."', '". $nomFichierVersion ."')";
 	$res = mysqli_query($connexion, $requete);
 	return $res;
 }
 
+function insertGroupe($connexion, $nomGrp){
+	$nomGroupe = mysqli_real_escape_string($conneixon, $nomGrp);
+	$requete = "INSERT INTO Groupe (nomGrp) VALUES (' ". $nomGroupe ." ')";
+	$res = mysqli_query($connexion, $requete);
+	return $res;
+}
+	
 /*function search($connexion, $table, $valeur) {
 	$valeur = mysqli_real_escape_string($connexion, $valeur); // au cas où $valeur provient d'un formulaire
 	if($table == 'Series')
