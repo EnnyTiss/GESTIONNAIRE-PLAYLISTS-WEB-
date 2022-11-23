@@ -8,16 +8,13 @@ if($series == null || count($Chanson) == 0) {
 }*/
 
 // recupération des versions
-$Version = getInstances($connexion, "Version"); // il va manque les genres
+$Version = getVersionChanson($connexion); // il va manque les genres
+
+
 if($Version == null || count($Version) == 0) {
 	$message .= "Aucune version n'a été trouvée dans la base de données !";
 }
 
-/*
-** À vous de jouer : lister les critiques en vous inspirant du code ci-dessus.
-** Vous pourrez plus tard améliorer le code en affichant chaque série avec les
-** critiques qui la concernent !
-*/
 
 
 

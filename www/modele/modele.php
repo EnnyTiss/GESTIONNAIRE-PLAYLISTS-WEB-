@@ -35,6 +35,13 @@ function getInstances($connexion, $nomTable) {
 	return $instances;
 }
 
+function getVersionChanson($connexion){
+	$requete = "SELECT v.* , c.titreChanson FROM Version as v JOIN Chanson as c ON v.idC=c.idC JOIN Genre as g on c.idG = g.idG ";
+	$res = mysqli_query($connexion, $requete);
+	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $instances;
+}
+
 // retourne les instances d'épisodes numérotés 1 et 2 
 function getEpisodesPrepared($connexion) {
 	$requete = "SELECT titre FROM Episodes WHERE numero = ?";
