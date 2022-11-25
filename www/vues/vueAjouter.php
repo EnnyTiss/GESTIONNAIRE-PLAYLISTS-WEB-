@@ -2,7 +2,7 @@
 <!-- test-->
 <form method="post" action="#">
 	<label for="titreChanson">Nom de la Chanson : </label>
-	<input type="text" name="titreChanson" id="titreChanson" placeholder="Black Summer" />
+	<input type="text" name="titreChanson" id="titreChanson" placeholder="Black Summer" value="valeurpardef" />
 	<br/>
 	<label for="dateVersion"> Date de sortie </label>
 	<input type="date" name="dateVersion" id="dateVersion" />
@@ -15,8 +15,8 @@
 	<label for="nomGroupe"> nom du groupe : </label>
 	<!--<input type="text" name="nomGroupe" id="nomGroupe" /> -->	
 	<select name = "nomGroupe" id = "nomGroupe" > 
-		<option value="Muse">Muse</option>
-		<option value="RHCP">RHCP</option>
+		<option value="Air">Air</option>
+		<option value="AC/DC">AC/DC</option>
 		<option value="Genesis">Genesis</option>
 		<option value="existe pas">Existe pas</option>
 	</select>
@@ -24,8 +24,8 @@
 	<label for="genreChanson"> genre chanson : </label>
 	<!--<input type="text" name="genreChanson" id="genreChanson" />	-->
 	<select name = "genreChanson" id = "genreChanson" > 
-		<option value="pop">pop</option>
-		<option value="rock">rock</option>
+		<option value="Electro">Electro</option>
+		<option value="Rock">rock</option>
 	</select>
 	<br/>
 	<label for="nomFichierV"> nom fichier : </label>
