@@ -15,6 +15,9 @@ header {
     border-radius: 1em;
 }
 
+/*.titre {
+    
+}*/
 
 .accueil {
     border-color: #FF9900;
@@ -24,6 +27,23 @@ header {
     width: 50%;
     height: 50%; 
 }
+table{
+    border-collapse: collapse;
+}
+
+/*tr {
+    border : 1px solid black;
+}*/
+
+th {
+    border : 1px solid black;
+}
+
+td{
+    border: 1px solid black;
+}
+
+
 
 #divCentral {
     display: flex;

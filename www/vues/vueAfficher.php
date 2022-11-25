@@ -1,8 +1,11 @@
+
+			
+<h2>Liste des versions de chanson :</h2>
+
 <?php if(isset($message)) { ?>
 	<p style="background-color: yellow;"><?= $message ?></p>
 <?php } ?>
-			
-<h2>Liste des versions de chanson :</h2>
+
 
 <table>
     <thead>
@@ -15,8 +18,11 @@
     </thead>
     <tbody>
 	  	<?php foreach($Version as $version) { ?>
-			<tr><td> <?= $version['titreChanson'] ?> </td> <td> <?= $version['numV'] ?> </td> <td> <?= $version['nomFichierV'] ?> </td> <td> <?= $version['genreChanson'] ?> </td></tr>
+			<tr>
+				<td> <?= $version['idC'] ?> </td> <td> <?= $version['numV'] ?> </td> <td> <?= $version['nomFichierV'] ?> </td>
+			</tr>
 		<?php } ?>
 	</tbody>
 </table>
 
+<!--<td> < ?= $version['genreChanson'] ?> </td>-->

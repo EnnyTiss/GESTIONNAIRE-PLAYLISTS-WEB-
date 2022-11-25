@@ -8,7 +8,7 @@ if($series == null || count($Chanson) == 0) {
 }*/
 
 // recupération des versions
-$Version = getVersionChanson($connexion); // il va manque les genres
+$Version = getInstances($connexion, "Version"); // il va manque les genres
 
 
 if($Version == null || count($Version) == 0) {
