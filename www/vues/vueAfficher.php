@@ -5,6 +5,6 @@
 <h2>Liste des versions de chanson :</h2>
 <ul>
 <?php foreach($Version as $version) { ?>
-	<li><?= $version['idC'] ?><?= $version['numV'] ?><?= $version['nomFichierV'] ?></li>
+	<li><?= $version['idC'] ?>;<?= $version['numV'] ?>;<?= $version['nomFichierV'] ?></li>
 <?php } ?>
-</ul>
+</ul> 

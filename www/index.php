@@ -10,6 +10,18 @@ require('inc/includes.php'); // inclut des constantes et fonctions du site (nom,
 require('inc/routes.php'); // fichiers de routes
 
 $connexion = getConnexionBD(); // connexion à la BD
+/*
+$requete_insert = "INSERT INTO p1810913.Genre (nomGenre) SELECT genre FROM dataset.songs2000";
+$res_insert = mysqli_query($connexion,$requete_insert);
+$tabGenre = mysqli_fetch_all($res_insert,MYSQL_ASSOC);
+$nomGenre = explode (";",$tabGenre,1);
+$requete_suppr = "TRUNCATE TABLE Genre"; //supprimer les données de la table dans phpmyadmin
+$res_suppr = mysqli_query($connexion, $requete_suppr);
+foreach($nomGenre as $genre){
+	$requete = "INSERT INTO p1810913.Genre (nomGenre) SELECT DISTINCT '". $genre ."' ";
+	$res = mysqli_query($connexion,$requete);
+};*/
+
 ?>
 <!DOCTYPE html>
 <html>

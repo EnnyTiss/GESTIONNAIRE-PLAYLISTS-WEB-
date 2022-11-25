@@ -75,44 +75,76 @@ function getGroupeByName($connexion, $nomGrp) {
 
 function insertGroupe($connexion, $nomGrp){
 	$nomGroupe = mysqli_real_escape_string($connexion, $nomGrp);
-	$requete = "INSERT INTO Groupe (nomGrp) VALUES (' ". $nomGroupe ." ')";
+	$requete = "INSERT INTO Groupe (nomGrp) VALUES ('". $nomGroupe ."')";
 	$res = mysqli_query($connexion, $requete);
 	return $res;
 }
-function insertChanson($connexion, $titreChanson, $genreChanson, $nomGrp){
+function insertChanson($connexion, $titreChanson, $nomGrp){
 	$titre = mysqli_real_escape_string($connexion, $titreChanson); // au cas où $titreChanson provient d'un formulaire
-	$genre = mysqli_real_escape_string($connexion, $genreChanson); // au cas où $genreChanson vient d'un formulaire
+	//$genre = mysqli_real_escape_string($connexion, $genreChanson); // au cas où $genreChanson vient d'un formulaire
 	$nomG = mysqli_real_escape_string($connexion, $nomGrp);
-	$requete = "INSERT INTO Chanson (titreChanson, genreChanson, nomGrp) VALUES (' ". $titre ." ', ' ". $genre ." ', ' ". $nomG ." ')";
+	$requete = "INSERT INTO Chanson (titreChanson, nomGrp) VALUES ('". $titre ."', '". $nomG ."')";
+	echo($requete);
 	$res = mysqli_query($connexion, $requete);
 	return $res;
 }
 
+function insertGenre($connexion){
+	$req_select = "SELECT genre FROM dataset.songs2000";
+	$res_select = mysqli_query($connexion,$req_select);
+	$tabGenre = mysqli_fetch_all($res_select);
+	foreach($tabGenre as $tab){
+		$genre = explode(";",$tab);
+		$genre = explode ("/",$tab);
+		$req_insert = "INSERT INTO p1810913.Genre (idG, nomGenre) VALUES (NULL, '". $genre ."')";
+		$res = mysqli_query($connexion,$req_insert);
+		echo("l'insertion des genres s'est bien déroulée");
+	}
+	return $res;
+}
+/*
 function insertVersion($connexion, $titreChanson, $dureeV, $dateV, $nomFichierV){
 	$titre = mysqli_real_escape_string($connexion, $titreChanson);
-	$idTitre = "SELECT idC FROM Chanson WHERE titreChanson = '". $titre ."'";
-	echo($idTitre);
+	$req_titre = "SELECT idC FROM Chanson WHERE titreChanson = '". $titre ."'";
+	$res_titre = mysqli_query($connexion, $req_titre);
+	$idC = implode(mysqli_fetch_all($res_titre, MYSQLI_ASSOC));
+	echo($idC);
 	$dureeVersion = mysqli_real_escape_string($connexion, $dureeV);
 	echo('duree ça passe');
 	$dateVersion = mysqli_real_escape_string($connexion, $dateV);
 	echo('date ça passe');
 	$nomFichierVersion = mysqli_real_escape_string($connexion, $nomFichierV);
 	echo('nom fichier ça passe');
-	$requete= "INSERT INTO Version (idC, dureeV, dateV, nomFichierV) VALUES ('". $idTitre ."','". $dureeVersion ."', '". $dateVersion ."', '". $nomFichierVersion ."')";
+	$requete= "INSERT INTO Version (idC, dureeV, dateV, nomFichierV) VALUES ('". $idC ."','". $dureeVersion ."', '". $dateVersion ."', '". $nomFichierVersion ."')";
+	$res = mysqli_query($connexion, $requete);
+	return $res;
+}
+*/
+function insertVersion($connexion, $titreChanson, $dureeV, $dateV, $nomFichierV){
+	$titre = mysqli_real_escape_string($connexion, $titreChanson);
+	$idTitre = "SELECT idC FROM Chanson WHERE titreChanson = '". $titre ."'";
+	$dureeVersion = mysqli_real_escape_string($connexion, $dureeV);
+	echo('duree ça passe');
+	$dateVersion = mysqli_real_escape_string($connexion, $dateV);
+	echo('date ça passe');
+	$nomFichierVersion = mysqli_real_escape_string($connexion, $nomFichierV);
+	echo('nom fichier ça passe');
+	$requete= "INSERT INTO Version (idC, numV, dureeV, dateV, nomFichierV) VALUES ('". $idTitre ."',NULL,'". $dureeVersion ."', '". $dateVersion ."', '". $nomFichierVersion ."')";
 	$res = mysqli_query($connexion, $requete);
 	return $res;
 }
 
 
 	
-function search($connexion, $table, $valeur) {
+/*function search($connexion, $table, $valeur) {
 	$valeur = mysqli_real_escape_string($connexion, $valeur); // au cas où $valeur provient d'un formulaire
-	if($table == 'Version'){
-		$requete = 'SELECT * FROM Version WHERE titreChanson LIKE \'%'.$valeur.'%\';';
-	}
+	if($table == 'Series')
+		$requete = 'SELECT * FROM Series WHERE nomSerie LIKE \'%'.$valeur.'%\';';
+	else  // $table == 'Actrices'
+		$requete = 'SELECT * FROM Actrices WHERE nom LIKE \'%'.$valeur.'%\' OR prenom LIKE \'%'.$valeur.'%\';';
 	$res = mysqli_query($connexion, $requete);
 	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $instances;
 }
-
+*/
 ?>

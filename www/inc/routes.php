@@ -9,7 +9,8 @@
 $routes = array(
 	'afficher' => array('controleur' => 'controleurAfficher', 'vue' => 'vueAfficher'),
 	'ajouter' => array('controleur' => 'controleurAjouter', 'vue' => 'vueAjouter'),
-	'rechercher' => array('controleur' => 'controleurRechercher', 'vue' => 'vueRechercher')
+	'rechercher' => array('controleur' => 'controleurRechercher', 'vue' => 'vueRechercher'),
+	'PHP' => array('controleur' => 'controleurPHP', 'vue' =>'vuePHP')
 );
 
 ?>
