@@ -1,18 +1,40 @@
 <main>
 	
-	<div class "accueil"><p>Site en construction, attention ou vous mettez vos pieds</p>
-	<img src="img/NOGODPLEASENO.png" alt="meme the office, micheal scott crie no, god! no, god no, please no ! no ! no ! nooooo! " class="image_accueil" />
+	<div class "accueil"><p>Compteurs des données disponibles : </p>
+	
 	</div>
 	
-	<?php
-		$nb = countInstances($connexion, "Series");
+	<?php $nbChanson = countInstances($connexion, "Chanson");
+	$nbGroupe = countInstances($connexion, "Groupe"); ?>
+
+	<table> 
+	<thead>
+		<tr>
+			<th> nombre de chansons </th>
+			<th> nombre de groupes </th>
+			<th> nombre de genres </th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td> <?php $nbChanson ?> </td>
+			<td> <?php $nbGroupe ?> </td>
+			<td> genre </td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+<!--	< ?php
+		$nb = countInstances($connexion, "Chanson");
 		if($nb <= 0)
-			$message = "Aucune série n'a été trouvée dans la base de données !";
+			$message = "Aucune information n'a été trouvée dans la base de données !";
 		else
 			$message = "Actuellement $nb séries dans la base.";
 
 	?>
-	<div><p><?= $message ?></p></div>
+	<div><p>< ?= $message ?></p></div>-->
 	
 </main>
 

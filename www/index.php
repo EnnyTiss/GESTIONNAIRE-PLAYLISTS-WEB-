@@ -30,7 +30,8 @@ foreach($nomGenre as $genre){
 	<!-- le titre du document, qui apparait dans l'onglet du navigateur -->
     <title> Portée par le vent </title>
     <!-- lie le style CSS externe  -->
-    <link href="css/style.css" rel="stylesheet" media="all" type="text/css">
+	<!-- md5_file : force rerfresh le fichier css -->
+    <link href="css/style.css?md5=<?= md5_file("css/style.css");?>" rel="stylesheet" media="all" type="text/css">
     <!-- ajoute une image favicon (dans l'onglet du navigateur) -->
     <link rel="shortcut icon" type="image/x-icon" href="img/logo.png" />
 </head>
