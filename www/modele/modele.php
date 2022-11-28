@@ -19,6 +19,7 @@ function deconnectBD($connexion) {
 // nombre d'instances d'une table $nomTable
 function countInstances($connexion, $nomTable) {
 	$requete = "SELECT COUNT(*) AS nb FROM $nomTable";
+	echo $requete;
 	$res = mysqli_query($connexion, $requete);
 	if($res != FALSE) {
 		$row = mysqli_fetch_assoc($res);

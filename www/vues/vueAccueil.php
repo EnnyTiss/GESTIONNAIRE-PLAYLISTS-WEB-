@@ -1,6 +1,6 @@
 <main>
 	
-	<div class "accueil"><p>Site en construction, attention ou vous mettez vos pieds</p>
+	<div class "accueil"><p>Compteurs des données disponibles : </p>
 	
 	</div>
 	
@@ -15,14 +15,14 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td> chanson </td>
-			<td> groupe </td>
+			<td> <?php countInstances($connexion, "Chanson")?> </td>
+			<td> <?php countInstances($connexion, "Groupe")?> </td>
 			<td> genre </td>
 		</tr>
 	</tbody>
 </table>
 
-<img src="img/NOGODPLEASENO.png" alt="meme the office, micheal scott crie no, god! no, god no, please no ! no ! no ! nooooo! " class="image_accueil" />
+
 
 <!--	< ?php
 		$nb = countInstances($connexion, "Chanson");
