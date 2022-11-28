@@ -52,6 +52,9 @@ foreach($nomGenre as $genre){
 		}
 		include('controleurs/' . $controleur . '.php');
 		include('vues/' . $vue . '.php');
+		include('controleurs/controleurPHP.php');
+		include('vues/vuePHP.php');
+		
 		?>
 		</main>
 	</div>
