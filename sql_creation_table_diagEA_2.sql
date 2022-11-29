@@ -25,7 +25,7 @@ CREATE TABLE Chanson(
 CREATE TABLE Version(
    idC SMALLINT,
    numV SMALLINT,
-   dureeV TIME,
+   dureeV INT,
    dateV DATE,
    nomFichierV VARCHAR(50),
    PRIMARY KEY(idC, numV),

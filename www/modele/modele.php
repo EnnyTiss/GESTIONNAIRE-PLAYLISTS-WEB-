@@ -19,7 +19,6 @@ function deconnectBD($connexion) {
 // nombre d'instances d'une table $nomTable
 function countInstances($connexion, $nomTable) {
 	$requete = "SELECT COUNT(*) AS nb FROM $nomTable";
-	echo $requete;
 	$res = mysqli_query($connexion, $requete);
 	if($res != FALSE) {
 		$row = mysqli_fetch_assoc($res);
@@ -35,13 +34,6 @@ function getInstances($connexion, $nomTable) {
 	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $instances;
 }
-
-//function getVersionChanson($connexion){
-//	$requete = "SELECT v.* , c.titreChanson FROM Version as v JOIN Chanson as c ON v.idC=c.idC JOIN Genre as g on c.idG = g.idG ";
-//	$res = mysqli_query($connexion, $requete);
-//	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
-//	return $instances;
-//}
 
 // retourne les instances d'épisodes numérotés 1 et 2 
 function getEpisodesPrepared($connexion) {
@@ -110,6 +102,55 @@ function insertGenre($connexion){
 	}
 	return $res;
 }
+
+function genererPlaylist($connexion, $titrePlaylist, $dureePlaylist/*, $genrePlaylist*/){
+	$titrePlaylist = mysqli_real_escape_string($connexion, $titrePlaylist);
+	$dureePlay = mysqli_real_escape_string($connexion, $dureePlaylist); //duree de la playlist voulue
+    //$genrePlay = mysqli_real_escape_string($connexion, $genrePlaylist);
+	$datejour = date('d-m-Y'); //date insertion playlist
+    //$prefPlay = mysqli_real_escape_string($connexion, $prefPlay); //peut être NULL (heureusement purée)
+
+	$req_play = "INSERT INTO Playlist (idP, titrePlaylist, datePlaylist) VALUES (NULL, '". $titrePlaylist ."', '". $datejour ."')";
+	$res_play = mysqli_query($connexion, $req_play); //création de la
+	echo($req_play."<br/>");
+	$req_idPlay = "SELECT idP FROM Playlist WHERE titreplaylist LIKE '". $titrePlaylist ."' ";
+	$res_idPlay = mysqli_prepare($connexion, $req_idPlay); //préparation requête récup idP
+	mysqli_stmt_bind_param($res_idPlay, "i" ,$idP); //on relie le résultat de la requête à $idP
+	$idP = mysqli_stmt_get_result($res_idPlay); //on stocke l'idP qu'on a créé
+	echo($req_idPlay."<br/>");
+	//$idPlay = mysqli_fetch_row($res_idPlay); //on stocke l'idP qu'on a créé
+
+	$sum_duree = 0;
+	//foreach($idPlay as $idP){
+	echo($idP."<br/>");
+	while($sum_duree < ($dureePlay + 60)){//minute près
+		$idC = rand()%2000 + 1; //intervalle 1 à 2000 
+		$req_count = "SELECT COUNT(numV) FROM Version WHERE idC ='". $idC ."' "; //nombre de versions pour une certaine chanson
+		$res_count = mysqli_prepare($connexion, $req_count); //préparation de la requête
+		if($res_count == false) {
+			return null;
+		}
+		mysqli_stmt_bind_param($res_count, "i" ,$count); //on relie le resultat de la requete à la variable $count en int
+		$count = mysqli_stmt_get_result($res_count); //on stocke le résultat dans $count
+		
+		$numV= rand()%($count-1) +1; //intervalle 1 à $count;
+		$req_insertP = "INSERT INTO Contenir (idC, numV, idP) VALUES('". $idC ."', '". $numV ."', '". $idP ."')";
+		$res_insertP = mysqli_query($connexion, $req_insertP); //insertion des chansons dans une playlist (relation Contenir)
+		$req_duree = "SELECT dureeV FROM Version WHERE idC = '". $idC ."' AND numV = '". $numV ."' ";
+		$res_duree = mysqli_prepare($connexion, $req_duree); //recup duree Version insérée dans playlist
+		if($res_duree == false) {
+			return null;
+		}
+		mysqli_stmt_bind_param($res_duree, "i", $dureeV);
+		$dureeV = mysqli_stmt_get_result($res_duree); //on stocke le résultat dans $dureeV
+		
+		$sum_duree += $dureeV; //incrémentation de la somme des durées des versions insérées
+
+	} 
+	//}
+}
+
+
 /*
 function insertVersion($connexion, $titreChanson, $dureeV, $dateV, $nomFichierV){
 	$titre = mysqli_real_escape_string($connexion, $titreChanson);
@@ -137,7 +178,7 @@ function insertVersion($connexion, $titreChanson, $dureeV, $dateV, $nomFichierV)
 	echo('date ça passe');
 	$nomFichierVersion = mysqli_real_escape_string($connexion, $nomFichierV);
 	echo('nom fichier ça passe');
-	$requete= "INSERT INTO Version (idC, numV, dureeV, dateV, nomFichierV) VALUES ('". $idTitre ."',NULL,'". $dureeVersion ."', '". $dateVersion ."', '". $nomFichierVersion ."')";
+	$requete= "INSERT INTO Version (idC, numV, dureeV, dateV, nomFichierV) VALUES ('". $idTitre ."',2,'". $dureeVersion ."', '". $dateVersion ."', '". $nomFichierVersion ."')";
 	$res = mysqli_query($connexion, $requete);
 	return $res;
 }

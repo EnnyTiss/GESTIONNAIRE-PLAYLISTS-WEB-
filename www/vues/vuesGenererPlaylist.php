@@ -1,7 +1,7 @@
 <h2> Générer une playlist aléatoire </h2>
 
 <form method="post" action="#">
-    <label for="duree"> durée de la playlist</label>
+    <label for="dureePlay"> durée de la playlist</label>
     <input type="number" name="duree" id="duree"/>
     <label for="genre"> Genre préféré</label>
     <input type="text" name="genre" id="genre"/>
