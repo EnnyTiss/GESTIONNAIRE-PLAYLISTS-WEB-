@@ -2,9 +2,9 @@
 
 <form method="post" action="#">
     <label for="dureePlay"> durée de la playlist</label>
-    <input type="number" name="duree" id="duree"/>
+    <input type="number" name="dureePlay" id="dureePlay"/>
     <label for="genre"> Genre préféré</label>
-    <input type="text" name="genre" id="genre"/>
+    <input type="text" name="genrePlay" id="genrePlay"/>
     <label for="playcount"> musiques les plus jouées</label>
     <input type="number" name="playcount" id="playcount"/>
     <label for="skipcount"> musiques les plus sautées</label>
