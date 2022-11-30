@@ -8,6 +8,7 @@
 	<thead>
 		<tr>
 			<th> nombre de chansons </th>
+			<th> nombre de versions </th>
 			<th> nombre de groupes </th>
 			<th> nombre de genres </th>
 		</tr>
@@ -15,6 +16,7 @@
 	<tbody>
 		<tr>
 			<td> <?= $nbChanson ?> </td>
+			<td> <?= $nbVersion ?> </td>
 			<td> <?= $nbGroupe ?> </td>
 			<td> <?= $nbGenre ?> </td>
 		</tr>
