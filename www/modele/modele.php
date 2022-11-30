@@ -71,7 +71,15 @@ function getGroupeByName($connexion, $nomGrp) {
 	$Groupe = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $Groupe;
 }
-// insère une nouvelle série nommée $titreChanson
+
+//cherche playlist par titre
+function getPlaylistByName($connexion, $titrePlaylist){
+	$titrePlay = mysqli_real_escape_string($connexion, $titrePlaylist);
+	$requete = "SELECT * FROM Groupe WHERE nomGrp = '". $titrePlay . "'";
+	$res = mysqli_query($connexion, $requete);
+	$Playlist = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $Playlist;
+}
 
 function insertGroupe($connexion, $nomGrp){
 	$nomGroupe = mysqli_real_escape_string($connexion, $nomGrp);
@@ -104,50 +112,70 @@ function insertGenre($connexion){
 }
 
 function genererPlaylist($connexion, $titrePlaylist, $dureePlaylist/*, $genrePlaylist*/){
-	$titrePlaylist = mysqli_real_escape_string($connexion, $titrePlaylist);
+	$titrePlay = mysqli_real_escape_string($connexion, $titrePlaylist);
 	$dureePlay = mysqli_real_escape_string($connexion, $dureePlaylist); //duree de la playlist voulue
     //$genrePlay = mysqli_real_escape_string($connexion, $genrePlaylist);
-	$datejour = date('d-m-Y'); //date insertion playlist
+	//$datejour = date('d-m-Y'); //date insertion playlist
     //$prefPlay = mysqli_real_escape_string($connexion, $prefPlay); //peut être NULL (heureusement purée)
 
-	$req_play = "INSERT INTO Playlist (idP, titrePlaylist, datePlaylist) VALUES (NULL, '". $titrePlaylist ."', '". $datejour ."')";
-	$res_play = mysqli_query($connexion, $req_play); //création de la
-	echo($req_play."<br/>");
-	$req_idPlay = "SELECT idP FROM Playlist WHERE titreplaylist LIKE '". $titrePlaylist ."' ";
-	$res_idPlay = mysqli_prepare($connexion, $req_idPlay); //préparation requête récup idP
-	mysqli_stmt_bind_param($res_idPlay, "i" ,$idP); //on relie le résultat de la requête à $idP
-	$idP = mysqli_stmt_get_result($res_idPlay); //on stocke l'idP qu'on a créé
-	echo($req_idPlay."<br/>");
-	//$idPlay = mysqli_fetch_row($res_idPlay); //on stocke l'idP qu'on a créé
-
+	$req_play = "INSERT INTO Playlist (idPlay, titrePlay, datePlay) VALUES (NULL, '". $titrePlay ."', NOW())";	
+	echo($req_play);
+	$res_play = mysqli_query($connexion, $req_play); //création de la playlist
+	if($res_play== false){echo "l'insertion marche pas avant boucle";}else{echo("insertion est passée");};
+	
+	$req_idPlay = "SELECT idPlay FROM Playlist WHERE titrePlay LIKE '". $titrePlay ."' ";
+	//$res_idPlay = mysqli_prepare($connexion, $req_idPlay);
+	$res_idPlay = mysqli_query($connexion, $req_idPlay); //préparation requête récup idP
+	//mysqli_stmt_bind_param($res_idPlay, "i" ,$titrePlaylist); //on relie le résultat de la requête à $idP
+	//$idPlay = mysqli_stmt_get_result($res_idPlay); //on stocke l'idP qu'on a créé */
+	echo($req_idPlay."<br/>"); //bonne req récupérée
+	$idPlay = mysqli_fetch_all($res_idPlay, MYSQLI_ASSOC); //on stocke l'idP qu'on a créé
 	$sum_duree = 0;
-	//foreach($idPlay as $idP){
-	echo($idP."<br/>");
-	while($sum_duree < ($dureePlay + 60)){//minute près
-		$idC = rand()%2000 + 1; //intervalle 1 à 2000 
-		$req_count = "SELECT COUNT(numV) FROM Version WHERE idC ='". $idC ."' "; //nombre de versions pour une certaine chanson
-		$res_count = mysqli_prepare($connexion, $req_count); //préparation de la requête
-		if($res_count == false) {
-			return null;
-		}
-		mysqli_stmt_bind_param($res_count, "i" ,$count); //on relie le resultat de la requete à la variable $count en int
-		$count = mysqli_stmt_get_result($res_count); //on stocke le résultat dans $count
-		
-		$numV= rand()%($count-1) +1; //intervalle 1 à $count;
-		$req_insertP = "INSERT INTO Contenir (idC, numV, idP) VALUES('". $idC ."', '". $numV ."', '". $idP ."')";
-		$res_insertP = mysqli_query($connexion, $req_insertP); //insertion des chansons dans une playlist (relation Contenir)
-		$req_duree = "SELECT dureeV FROM Version WHERE idC = '". $idC ."' AND numV = '". $numV ."' ";
-		$res_duree = mysqli_prepare($connexion, $req_duree); //recup duree Version insérée dans playlist
-		if($res_duree == false) {
-			return null;
-		}
-		mysqli_stmt_bind_param($res_duree, "i", $dureeV);
-		$dureeV = mysqli_stmt_get_result($res_duree); //on stocke le résultat dans $dureeV
-		
-		$sum_duree += $dureeV; //incrémentation de la somme des durées des versions insérées
+	foreach($idPlay as $idP){
+		echo($idP['idPlay']."<br/>");
+		while($sum_duree < ($dureePlay + 60)){//minute près
+			$idC = rand()%2000 + 1; //intervalle 1 à 2000  
+			echo("idc vaut".$idC."<br/>");
+			$req_count = "SELECT COUNT(numV) FROM Version WHERE idC = '". $idC ."' "; //nombre de versions pour une certaine chanson
+			$res_count = mysqli_query($connexion, $req_count);
 
-	} 
-	//}
+			$counts = mysqli_fetch_all($res_count, MYSQLI_ASSOC);
+			/*$res_count = mysqli_prepare($connexion, $req_count); //préparation de la requête
+			if($res_count == false) {
+				return null;
+			}
+			mysqli_stmt_bind_param($res_count, "i" ,$idC); //on relie le resultat de la requete à la variable $count en int
+			mysqli_stmt_execute($res_count);
+			$count = mysqli_stmt_get_result($res_count); //on stocke le résultat dans $count
+			*/
+			foreach($counts as $count){
+				echo($count['COUNT(numV)']."<br/>");
+				$numV= rand()%($count['COUNT(numV)']-1) +1; //intervalle 1 à $count;
+				$req_insertP = "INSERT INTO Contenir (idC, numV, idPlay) VALUES('". $idC ."', '". $numV ."', '". $idP['idPlay'] ."')";
+				$res_insertP = mysqli_query($connexion, $req_insertP); //insertion des chansons dans une playlist (relation Contenir)
+				
+				$req_duree = "SELECT dureeV FROM Version WHERE idC = '". $idC ."' AND numV = '". $numV ."' ";
+				$res_duree = mysqli_query($connexion, $req_duree);
+				/*$res_duree = mysqli_prepare($connexion, $req_duree); //recup duree Version insérée dans playlist
+				if($res_duree == false) {
+					return null;
+				}
+				mysqli_stmt_bind_param($res_duree, "i", $dureeV);
+				mysqli_stmt_execute($res_count);
+				$dureeV = mysqli_stmt_get_result($res_duree); //on stocke le résultat dans $dureeV
+				*/
+				$dureeVersion = mysqli_fetch_all($res_duree, MYSQLI_ASSOC);
+				foreach($dureeVersion as $dureeV){
+					$sum_duree = $sum_duree + $dureeV; //incrémentation de la somme des durées des versions insérées
+				}
+
+				
+					
+			}
+		} 
+	}
+
+	return $res_play;
 }
 
 

@@ -4,9 +4,6 @@
 	
 	</div>
 	
-	<?php $nbChanson = countInstances($connexion, "Chanson");
-	$nbGroupe = countInstances($connexion, "Groupe"); ?>
-
 	<table> 
 	<thead>
 		<tr>
@@ -17,9 +14,9 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td> <?php $nbChanson ?> </td>
-			<td> <?php $nbGroupe ?> </td>
-			<td> genre </td>
+			<td> <?= $nbChanson ?> </td>
+			<td> <?= $nbGroupe ?> </td>
+			<td> <?= $nbGenre ?> </td>
 		</tr>
 	</tbody>
 </table>

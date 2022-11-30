@@ -1,14 +1,19 @@
 <h2> Générer une playlist aléatoire </h2>
 
 <form method="post" action="#">
-    <label for="dureePlay"> durée de la playlist</label>
-    <input type="number" name="dureePlay" id="dureePlay"/>
-    <label for="genre"> Genre préféré</label>
-    <input type="text" name="genrePlay" id="genrePlay"/>
-    <label for="playcount"> musiques les plus jouées</label>
-    <input type="number" name="playcount" id="playcount"/>
-    <label for="skipcount"> musiques les plus sautées</label>
-    <input type="number" name="skipcount" id="skipcount"/>
-    <label for="lastplayed"> musiques écoutées le plus récemment</label>
-    <input type="number" name="lastplayed" id="lastplayed"/>
+    <label for="titrePlay"> Titre de la playlist</label>
+    <input type="text" name="titrePlay" id="titrePlay"/><br/>
+    <label for="dureePlay"> Durée de la playlist</label>
+    <input type="number" name="dureePlay" id="dureePlay" min="0" value=1200/> secondes<br/> 
+    <label for="genrePlay"> Genre préféré</label>
+    <input type="text" name="genrePlay" id="genrePlay"/> <br/>
+    <label for="prefStats"> Préférences sur les statistiques</label>
+    <select name="prefStats" id="prefStats">
+    <option value="none">  </option>
+        <option value="playcount">Musiques les plus jouées</option>
+        <option value="skipcount">Musiques les plus sautées</option>
+        <option value="lastplayed">Musiques écoutées le plus récemment</option>
+    </select> <br/>
+    <br/><br/>
+	<input type="submit" name="boutonValider" value="Générer"/>
 </form>
