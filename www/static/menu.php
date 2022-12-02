@@ -5,5 +5,6 @@
 	<a href="index.php?page=afficher">Afficher des chansons <br/> </a>
 	<a href="index.php?page=rechercher">Rechercher <br/> </a>
 	<a href="index.php?page=GenererPlaylist"> Generer une playlist <br/> </a>
+	<a href="index.php?page=afficherPlaylist"> Afficher les playlists <br/> </a>
 </nav>
 
