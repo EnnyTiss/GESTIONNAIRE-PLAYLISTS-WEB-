@@ -11,7 +11,8 @@ $routes = array(
 	'ajouter' => array('controleur' => 'controleurAjouter', 'vue' => 'vueAjouter'),
 	'rechercher' => array('controleur' => 'controleurRechercher', 'vue' => 'vueRechercher'),
 	'PHP' => array('controleur' => 'controleurPHP', 'vue' => 'vuePHP'),
-	'GenererPlaylist' => array('controleur' => 'controleurGenererPlaylist', 'vue' => 'vueGenererPlaylist')
+	'GenererPlaylist' => array('controleur' => 'controleurGenererPlaylist', 'vue' => 'vueGenererPlaylist'),
+	'afficherPlaylist' => array('controleur' => 'controleurAfficherPlaylist', 'vue' => 'vueAfficherPlaylist')
 );
 
 ?>
