@@ -27,6 +27,16 @@ function countInstances($connexion, $nomTable) {
 	return -1;  // valeur négative si erreur de requête (ex, $nomTable contient une valeur qui n'est pas une table)
 }
 
+
+
+// retourne les instances d'une table $nomTable
+function getInstances($connexion, $nomTable) {
+	$requete = "SELECT * FROM $nomTable";
+	$res = mysqli_query($connexion, $requete);
+	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $instances;
+}
+
 //retourne les instances de Playlist pour AfficherPlaylist
 function GetVersionsDansPlaylist($connexion, $nomTable) {
 	$requete = "SELECT p.idPlay, p.titrePlay, COUNT(c.idC) as nbChansons, SUM(dureeV) as dureePl FROM Version v NATURAL JOIN Contenir c JOIN Playlist p ON c.idPlay=p.idPlay GROUP BY c.idPlay";
@@ -45,14 +55,6 @@ function GetTitrePlayByID($connexion, $id){
 
 function GetInfoById($connexion, $id){
 	$requete = "SELECT co.idC, co.numV, c.titreChanson, c.nomGrp, v.dureeV FROM Contenir co NATURAL JOIN Version v LEFT JOIN Chanson c on co.idC = c.idC WHERE idPlay = '". $id ."'";
-	$res = mysqli_query($connexion, $requete);
-	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
-	return $instances;
-}
-
-// retourne les instances d'une table $nomTable
-function getInstances($connexion, $nomTable) {
-	$requete = "SELECT * FROM $nomTable";
 	$res = mysqli_query($connexion, $requete);
 	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $instances;

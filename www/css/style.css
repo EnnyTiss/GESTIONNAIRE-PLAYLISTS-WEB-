@@ -1,5 +1,5 @@
 body {
-    background-color: #EEEEEE;
+    background-color: #3a324b;
 }
 
 header,
@@ -13,32 +13,23 @@ header {
     background-color: #FF9900;
     text-align: center;
     border-radius: 1em;
+    padding-left: 35px;
 }
 
-/*.titre {
-    
-}*/
-
-.accueil {
-    border-color: #FF9900;
-}
-
-.image_accueil {
-    width: 50%;
-    height: 50%; 
-}
 table{
     border-collapse: collapse;
 }
 
 
 th {
-    border : 1px solid black;
+    border : 1px solid #ffc773;
     background-color: #ffc773;
+    color: black;
 }
 
 td{
-    border: 1px solid black;
+    border: 1px solid whitesmoke;
+    color : whitesmoke;
 }
 
 
@@ -54,7 +45,7 @@ td{
 
 nav {
 	flex : 2;
-    background-color: #b59ff7;
+    background-color: #ffc773;
     padding-left: 1em;
     padding-right: 1em;
 	margin-left: 2em;
@@ -67,20 +58,31 @@ nav a {
 }
 
 nav a:visited {
-    color: #0000FF;
+    color: #8c00ff;
     text-decoration: none;
 }
 
 main {
 	flex : 10;
-    background-color: #EEEEEE;
+    background-color: #3a324b;
+    color: whitesmoke;
     padding-left: 6em;
+}
+
+main a {
+    color: #646eff ;
+    text-decoration: underline;
+}
+
+main a {
+    color: #b964ff ;
+    text-decoration: underline;
 }
 
 footer {
 	display: flex;
 	justify-content: space-around;
-    background-color: #669933;
+    background-color: #FF9900;
     border-radius: 1em;
 }
 

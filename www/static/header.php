@@ -2,7 +2,7 @@
 <header>
 	<div style="float:left;">
 		<a href="index.php">
-			<img src="img/sheep.png" width="60%" height="60%">
+			<img src="img/logo.png" width="100px" height="100px">
 		</a>
 	</div>
     <!-- le fameux titre <h1> à personnaliser ! faites-vous plaisir... -->
