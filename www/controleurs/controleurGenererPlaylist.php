@@ -12,3 +12,5 @@ if(isset($_POST['boutonValider'])) { // formulaire soumis
         echo("La playlist '". $titrePlay ."' existe déjà !");
     }
 }
+
+?>

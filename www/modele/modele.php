@@ -44,7 +44,7 @@ function GetTitrePlayByID($connexion, $id){
 }
 
 function GetInfoById($connexion, $id){
-	$requete = "SELECT c.titreChanson, g.nomGrp, v.dureeV FROM Chanson c JOIN Version v on v.idC=c.idC JOIN Groupe g on c.nomGrp=g.nomGrp JOIN Contenir co on co.numV=v.numV WHERE co.idPlay =  '". $id ."'";
+	$requete = "SELECT co.idC, co.numV, c.titreChanson, c.nomGrp, v.dureeV FROM Contenir co NATURAL JOIN Version v LEFT JOIN Chanson c on co.idC = c.idC WHERE idPlay = '". $id ."'";
 	$res = mysqli_query($connexion, $requete);
 	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $instances;
@@ -58,25 +58,6 @@ function getInstances($connexion, $nomTable) {
 	return $instances;
 }
 
-// retourne les instances d'épisodes numérotés 1 et 2 
-function getEpisodesPrepared($connexion) {
-	$requete = "SELECT titre FROM Episodes WHERE numero = ?";
-	$stmt = mysqli_prepare($connexion, $requete);
-	if($stmt == false) {
-		return null;
-	}
-	mysqli_stmt_bind_param($stmt, "i", $numEpisode); // lier la variable $var au paramètre de la requête
-	// $var à 1 pour afficher les épisodes numérotés 1
-	$numEpisode = 1;
-	mysqli_stmt_execute($stmt); // exécution de la requête
-	$episodes1 = mysqli_stmt_get_result($stmt);  // récupération des tuples résultats dans la variable $episodes1
-
-	// $var à 2 pour afficher les épisodes numérotés 2
-	$numEpisode = 2;
-	mysqli_stmt_execute($stmt); // pas besoin de lier, exécution directe de la requête
-	$episodes2 = mysqli_stmt_get_result($stmt);  // récupération des tuples résultats dans la variable $episodes1
-	return array("episodes1" => $episodes1, "episodes2" => $episodes2);
-}
 
 // retourne les informations sur la série nommée $titreChanson
 function getChansonByName($connexion, $titreChanson) {
@@ -95,10 +76,18 @@ function getGroupeByName($connexion, $nomGrp) {
 	return $Groupe;
 }
 
+function getGenreByName($connexion, $nomGenre){
+	$nomG = mysqli_real_escape_string($connexion, $nomGenre);
+	$requete = "SELECT * FROM Genre WHERE nomGenre = '". $nomG . "'";
+	$res = mysqli_query($connexion, $requete);
+	$Genre = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $Genre;
+}
+
 //cherche playlist par titre
 function getPlaylistByName($connexion, $titrePlaylist){
 	$titrePlay = mysqli_real_escape_string($connexion, $titrePlaylist);
-	$requete = "SELECT * FROM Groupe WHERE nomGrp = '". $titrePlay . "'";
+	$requete = "SELECT * FROM Playlist WHERE titrePlay = '". $titrePlay . "'";
 	$res = mysqli_query($connexion, $requete);
 	$Playlist = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $Playlist;
@@ -210,7 +199,22 @@ function genererPlaylist($connexion, $titrePlaylist, $dureePlaylist/*, $genrePla
 	return $res_play;
 }
 
+function deletePlaylist($connexion, $nomPlay){
+	$nomPlaylist = mysqli_real_escape_string($connexion, $nomPlay);
+	$req_idPlay = "SELECT idPlay FROM Playlist WHERE titrePlay LIKE '". $nomPlaylist ."'";
+	$res_idPlay= mysqli_query($connexion, $req_idPlay); //recup id Playlist à supprimer
+	$idPlaylist = mysqli_fetch_all($res_idPlay, MYSQLI_ASSOC);
 
+	$req_play="DELETE FROM Playlist WHERE titrePlay LIKE '". $nomPlaylist ."'";
+	$res_play= mysqli_query($connexion, $req_play); //suppression playlist
+	
+	foreach($idPlaylist as $idPlay){
+		$req_contenir = "DELETE FROM Contenir WHERE idPlay = '" . $idPlay['idPlay'] . "'";
+		$res_contenir = mysqli_query($connexion, $req_contenir);
+	}
+
+	return $res_contenir;
+}
 /*
 function insertVersion($connexion, $titreChanson, $dureeV, $dateV, $nomFichierV){
 	$titre = mysqli_real_escape_string($connexion, $titreChanson);

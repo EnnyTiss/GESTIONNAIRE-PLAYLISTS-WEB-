@@ -6,16 +6,21 @@ if(isset($_POST['boutonValider'])) { // formulaire soumis
 	//$dateV = $_POST['dateVersion'];
 	//$nomFichierV = $_POST['nomFichierV'];
 	$nomGrp = $_POST['nomGroupe'];
+	$nomGenre = $_POST['genreChanson'];
 	echo($nomGrp);
 	$verificationC = getChansonByName($connexion, $titreChanson);
 	if ($verificationC == FALSE){
 		echo('chanson c passé');
 	}
-	$verificationG = getGroupeByName($connexion, $nomGrp);
+	$verificationGrp = getGroupeByName($connexion, $nomGrp);
+	if($verificationGrp == FALSE){
+		echo('il vérifie bien que le grp existe (pas?)');
+	}
+	$verificationG = getGenreByName($connexion, $nomGenre);
 	if($verificationG == FALSE){
 		echo('il vérifie bien que le grp existe (pas?)');
 	}
-	if(($verificationC == FALSE || count($verificationC) == 0)) { // pas de série avec ce nom, insertion
+	if(($verificationC == FALSE || count($verificationC) == 0) && $verificationGrp == TRUE && $verificationG == TRUE) { // pas de série avec ce nom, insertion
 		//$insertionG = insertGroupe($connexion, $nomGrp);
 		$insertionC = insertChanson($connexion, $titreChanson, $nomGrp);
 		

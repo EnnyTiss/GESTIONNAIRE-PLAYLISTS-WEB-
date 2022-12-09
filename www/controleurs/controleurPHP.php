@@ -95,7 +95,7 @@ $recupDonnees = mysqli_fetch_all($res_recup, MYSQLI_ASSOC);
 
 foreach($recupDonnees as $recupDonnee){
 	$recupD = mysqli_real_escape_string($connexion, $recupDonnee['title']);
-	$req_idC = "SELECT idC FROM Chanson WHERE titreChanson = '". $recupD ."' ";
+	$req_idC = "SELECT idC, dateChanson FROM Chanson WHERE titreChanson = '". $recupD ."' ";
 	echo ($recupDonnee['title'].":".$req_idC."<br/>");
 	$res_idC = mysqli_query($connexion, $req_idC);
 
@@ -116,7 +116,7 @@ foreach($recupDonnees as $recupDonnee){
 		}while($i<=$recupDonnee['nbtitle']);
 		
 	}
-}*/
-
+}
+*/
 
 ?>

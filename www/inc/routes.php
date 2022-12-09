@@ -9,10 +9,10 @@
 $routes = array(
 	'afficher' => array('controleur' => 'controleurAfficher', 'vue' => 'vueAfficher'),
 	'ajouter' => array('controleur' => 'controleurAjouter', 'vue' => 'vueAjouter'),
-	'rechercher' => array('controleur' => 'controleurRechercher', 'vue' => 'vueRechercher'),
 	'PHP' => array('controleur' => 'controleurPHP', 'vue' => 'vuePHP'),
 	'GenererPlaylist' => array('controleur' => 'controleurGenererPlaylist', 'vue' => 'vueGenererPlaylist'),
-	'afficherPlaylist' => array('controleur' => 'controleurAfficherPlaylist', 'vue' => 'vueAfficherPlaylist')
+	'afficherPlaylist' => array('controleur' => 'controleurAfficherPlaylist', 'vue' => 'vueAfficherPlaylist'),
+	'supprimerPlaylist' => array('controleur' => 'controleurSupprimerPlaylist', 'vue' => 'vueSupprimerPlaylist')
 );
 
 ?>
