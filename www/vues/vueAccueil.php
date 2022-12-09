@@ -1,16 +1,15 @@
 <main>
 	
-	<div class "accueil"><p>Compteurs des données disponibles : </p>
-	
-	</div>
+	<h2>Compteurs des données disponibles : </h2>
+
 	
 	<table> 
 	<thead>
 		<tr>
-			<th> nombre de chansons </th>
-			<th> nombre de versions </th>
-			<th> nombre de groupes </th>
-			<th> nombre de genres </th>
+			<th>   nombre de chansons   </th>
+			<th>   nombre de versions   </th>
+			<th>   nombre de groupes   </th>
+			<th>   nombre de genres   </th>
 		</tr>
 	</thead>
 	<tbody>

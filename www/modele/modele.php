@@ -27,6 +27,16 @@ function countInstances($connexion, $nomTable) {
 	return -1;  // valeur négative si erreur de requête (ex, $nomTable contient une valeur qui n'est pas une table)
 }
 
+
+
+// retourne les instances d'une table $nomTable
+function getInstances($connexion, $nomTable) {
+	$requete = "SELECT * FROM $nomTable";
+	$res = mysqli_query($connexion, $requete);
+	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $instances;
+}
+
 //retourne les instances de Playlist pour AfficherPlaylist
 function GetVersionsDansPlaylist($connexion, $nomTable) {
 	$requete = "SELECT p.titrePlay, COUNT(c.idC) as nbChansons, SUM(dureeV) as dureePl FROM Version v NATURAL JOIN Contenir c JOIN Playlist p ON c.idPlay=p.idPlay GROUP BY c.idPlay";
@@ -50,33 +60,6 @@ function GetInfoById($connexion, $id){
 	return $instances;
 }
 
-// retourne les instances d'une table $nomTable
-function getInstances($connexion, $nomTable) {
-	$requete = "SELECT * FROM $nomTable";
-	$res = mysqli_query($connexion, $requete);
-	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
-	return $instances;
-}
-
-// retourne les instances d'épisodes numérotés 1 et 2 
-function getEpisodesPrepared($connexion) {
-	$requete = "SELECT titre FROM Episodes WHERE numero = ?";
-	$stmt = mysqli_prepare($connexion, $requete);
-	if($stmt == false) {
-		return null;
-	}
-	mysqli_stmt_bind_param($stmt, "i", $numEpisode); // lier la variable $var au paramètre de la requête
-	// $var à 1 pour afficher les épisodes numérotés 1
-	$numEpisode = 1;
-	mysqli_stmt_execute($stmt); // exécution de la requête
-	$episodes1 = mysqli_stmt_get_result($stmt);  // récupération des tuples résultats dans la variable $episodes1
-
-	// $var à 2 pour afficher les épisodes numérotés 2
-	$numEpisode = 2;
-	mysqli_stmt_execute($stmt); // pas besoin de lier, exécution directe de la requête
-	$episodes2 = mysqli_stmt_get_result($stmt);  // récupération des tuples résultats dans la variable $episodes1
-	return array("episodes1" => $episodes1, "episodes2" => $episodes2);
-}
 
 // retourne les informations sur la série nommée $titreChanson
 function getChansonByName($connexion, $titreChanson) {
