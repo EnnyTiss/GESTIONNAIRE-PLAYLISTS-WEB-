@@ -6,5 +6,7 @@
 	<a href="index.php?page=GenererPlaylist"> Generer une playlist <br/> </a>
 	<a href="index.php?page=afficherPlaylist"> Afficher les playlists <br/> </a>
 	<a href="index.php?page=supprimerPlaylist"> Supprimer une playlist <br/> </a>
+	
+	
 </nav>
 

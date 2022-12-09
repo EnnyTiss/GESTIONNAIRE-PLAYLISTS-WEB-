@@ -16,7 +16,7 @@
         <tbody>
             <?php foreach($Playlist as $playlist) { ?>
                 <tr>
-                    <td><a href="/index.php?page=afficherPlaylist&pl=<?=$playlist['idPlay']?>" ><?= $playlist['titrePlay'] ?></a> </td> <td> <?= $playlist['dureePl'] ?> </td> <td> <?= $playlist['nbChansons'] ?> </td>
+                    <td><a href="index.php?page=afficherPlaylist&pl=<?=$playlist['idPlay']?>" ><?= $playlist['titrePlay'] ?></a> </td> <td> <?= $playlist['dureePl'] ?> </td> <td> <?= $playlist['nbChansons'] ?> </td>
                 </tr>
             <?php } ?>
         </tbody>
@@ -25,7 +25,7 @@
 <?php }
  else {?>
     
-    <h3> <? $thisPL[titrePlay]?></h3>
+    <h3> <? $thisPL['titrePlay']?></h3>
     <table>
         <thead>
             <tr>

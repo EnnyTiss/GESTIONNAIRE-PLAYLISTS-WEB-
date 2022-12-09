@@ -4,7 +4,7 @@
     <label for="titrePlay"> Titre de la playlist</label>
     <input type="text" name="titrePlay" id="titrePlay"value="TopTitres2022"/><br/>
     <label for="dureePlay"> Durée de la playlist</label>
-    <input type="number" name="dureePlay" id="dureePlay" min="0" value="1200"/> secondes<br/> 
+    <input type="number" name="dureePlay" id="dureePlay" min="1" value="1200"/> secondes<br/> 
     <label for="genrePlay"> Genre préféré</label>
     <input type="text" name="genrePlay" id="genrePlay"/> <br/>
     <label for="prefStats"> Préférences sur les statistiques</label>

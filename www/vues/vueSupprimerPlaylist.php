@@ -1,7 +1,7 @@
 <h2>Suppression d'une playlist</h2>
 
 <form method="post" action="#">
-	<label for="nomPlaylist">Nom de la variété à supprimer : </label>
+	<label for="nomPlaylist">Nom de la playlist à supprimer : </label>
 	<input type="text" name="nomPlaylist" id="nomPlaylist" placeholder="Abba..." value="testplayboom" required /><br/>
 	
 	<br/><br/>

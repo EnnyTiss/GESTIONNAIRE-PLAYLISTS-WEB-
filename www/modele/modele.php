@@ -29,7 +29,7 @@ function countInstances($connexion, $nomTable) {
 
 //retourne les instances de Playlist pour AfficherPlaylist
 function GetVersionsDansPlaylist($connexion, $nomTable) {
-	$requete = "SELECT p.titrePlay, COUNT(c.idC) as nbChansons, SUM(dureeV) as dureePl FROM Version v NATURAL JOIN Contenir c JOIN Playlist p ON c.idPlay=p.idPlay GROUP BY c.idPlay";
+	$requete = "SELECT p.idPlay, p.titrePlay, COUNT(c.idC) as nbChansons, SUM(dureeV) as dureePl FROM Version v NATURAL JOIN Contenir c JOIN Playlist p ON c.idPlay=p.idPlay GROUP BY c.idPlay";
 	$res = mysqli_query($connexion, $requete);
 	$instances = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $instances;
@@ -169,9 +169,9 @@ function genererPlaylist($connexion, $titrePlaylist, $dureePlaylist/*, $genrePla
 	$sum_duree = 0;
 	foreach($idPlay as $idP){
 		//echo($idP['idPlay']."<br/>");
-		while($sum_duree < ($dureePlay + 60)){//minute près
+		while($sum_duree < ($dureePlay)){//minute près
 			$idC = rand()%2000 + 1; //intervalle 1 à 2000  
-			echo("idc vaut".$idC."<br/>");
+			//echo("idc vaut".$idC."<br/>");
 			$req_count = "SELECT COUNT(numV) FROM Version WHERE idC = '". $idC ."' "; //nombre de versions pour une certaine chanson
 			$res_count = mysqli_query($connexion, $req_count);
 

@@ -11,7 +11,7 @@ if(isset($_POST['boutonValider'])) { // formulaire soumis
 			$message = "La playlist $nomPlaylist a bien été supprimée !";
 		}
 		else {
-			$message = "Erreur lors de la suppression de la variété $nomPlaylist.";
+			$message = "Erreur lors de la suppression de la playlist $nomPlaylist.";
 		}
 	}
 	else {
