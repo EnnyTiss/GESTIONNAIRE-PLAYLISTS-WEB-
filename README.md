@@ -1,5 +1,11 @@
 # Portées par le vent
 
+Gestionnaire de playlists sous PHP et MySQL (avec HTML et CSS). Je ne suis plus sŝure de si c'est la dernière version ou l'avant-dernière.
+
+
+
+
+
 
 
 ## Getting started
